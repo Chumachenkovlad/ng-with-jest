@@ -1,27 +1,58 @@
-# NgWithJest
+# ANGULAR WITH JEST
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.17.
+this repo shows how to handle some specific issues
+related to the setting jest for angular
 
-## Development server
+## moment
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+change imports from
 
-## Code scaffolding
+```
+import \* as moment from 'moment';
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+to
 
-## Build
+```
+import moment from 'moment';
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+add next line to the tsconfig.json
 
-## Running unit tests
+and add next line to tsconfig.json (compilerOptions)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+"allowSyntheticDefaultImports": true
+```
 
-## Running end-to-end tests
+## lodash-es
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+update jest.config.js with
 
-## Further help
+```
+transformIgnorePatterns: ["node_modules/(?!lodash-es)"],
+transform: {
+  "^.+\\.(ts|html)$": "ts-jest",
+  "^.+\\.js$": "babel-jest"
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+add babel.config.js with
+
+```
+module.exports = function(api) {
+  api.cache(true);
+
+  const presets = ["@babel/preset-env"];
+  const plugins = [];
+
+  return {
+    presets,
+    plugins
+  };
+};
+```
+
+install babel preset with
+
+> npm i --save-dev @babel/preset-env
