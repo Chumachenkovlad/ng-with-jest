@@ -8,7 +8,7 @@ related to the setting jest for angular
 change imports from
 
 ```
-import \* as moment from 'moment';
+import * as moment from 'moment';
 ```
 
 to
